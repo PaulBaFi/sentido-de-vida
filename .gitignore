@@ -1,1 +1,31 @@
+# Política existente: documentación local no versionada
 docs/
+
+# Dependencias
+node_modules/
+
+# Variables privadas (conservar plantillas)
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Compilaciones y cachés
+.next/
+out/
+dist/
+build/
+coverage/
+.turbo/
+.vercel/
+*.tsbuildinfo
+next-env.d.ts
+
+# Temporales y registros
+*.log
+*.tmp
+*.temp
+*.swp
+*~
+.DS_Store
+Thumbs.db

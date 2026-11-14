@@ -1,0 +1,28 @@
+{
+  "name": "sentido-de-vida",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "npm@11.6.2",
+  "engines": {
+    "node": ">=24 <25",
+    "npm": ">=11 <12"
+  },
+  "scripts": {
+    "dev": "npm run dev --workspace=@sentido/web",
+    "build": "npm run build --workspaces --if-present",
+    "start": "npm run start --workspace=@sentido/web",
+    "typecheck": "npm run typecheck --workspaces",
+    "lint": "npm run lint --workspaces",
+    "check": "npm run typecheck && npm run lint"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "eslint": "^9.39.0",
+    "typescript-eslint": "^8.46.0"
+  },
+  "workspaces": [
+    "apps/*",
+    "services/*",
+    "packages/*"
+  ]
+}
