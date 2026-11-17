@@ -4,10 +4,13 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./authorization-design": "./src/authorization-policy.ts",
+    "./patients": "./src/patients.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "lint": "eslint src"
+    "lint": "eslint src tests",
+    "test": "node --test tests/authorization.test.mjs tests/patients.test.mjs"
   }
 }

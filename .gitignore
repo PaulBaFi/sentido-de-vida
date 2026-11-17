@@ -1,5 +1,34 @@
-# Política existente: documentación local no versionada
-docs/
+# Documentacion tecnica aprobada: lista cerrada
+docs/*
+!docs/LRPD/
+docs/LRPD/*
+!docs/arquitectura/
+docs/arquitectura/*
+!docs/base-de-datos/
+docs/base-de-datos/*
+!docs/base-de-datos/propuestas/
+docs/base-de-datos/propuestas/*
+!docs/evidencias/
+docs/evidencias/*
+!docs/fases/
+docs/fases/*
+!docs/seguridad/
+docs/seguridad/*
+!docs/servicios/
+docs/servicios/*
+!docs/LRPD/INFORMACION_MAESTRA_LRPD.md
+!docs/README.md
+!docs/arquitectura/SUPABASE_INTEGRATION.md
+!docs/base-de-datos/USERS_POSTGRES_ACTIVATION.md
+!docs/base-de-datos/USERS_POSTGRES_DESIGN.md
+!docs/base-de-datos/propuestas/PAC_SELF_ACCESS_DRAFT.sql
+!docs/evidencias/USERS_POSTGRES_SYNTHETIC_TESTS.md
+!docs/evidencias/VALIDACIONES.md
+!docs/fases/ESTADO_FASES.md
+!docs/seguridad/AUT.md
+!docs/seguridad/AUTHORIZATION_PROPOSAL.md
+!docs/servicios/PAC_FASE_3_4.md
+!docs/servicios/USERS_SERVICE.md
 
 # Dependencias
 node_modules/
@@ -29,3 +58,18 @@ next-env.d.ts
 *~
 .DS_Store
 Thumbs.db
+
+# Fuentes académicas locales no publicadas
+*.docx
+*.pdf
+
+# Configuración y material privado del backend
+**/users-integration/
+**/backend.env
+**/password*.txt
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.cer

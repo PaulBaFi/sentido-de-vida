@@ -1,10 +1,30 @@
 # Sentido de Vida
 
+## Estado vigente y documentación
+
+Fase 3.4 parcial: validadores y contratos PAC preparados, con [perfil de acceso propio](docs/servicios/PAC_FASE_3_4.md) disponible; fichas y contactos siguen bloqueados hasta aprobar los permisos SQL propuestos. No hay formularios de escritura ni consultas DNI habilitados.
+
+Fase 3.3 implementada y verificada localmente: login/logout Supabase Auth, dashboard protegido y nombre del perfil obtenido desde el servidor Next.js mediante la API Usuarios. PostgreSQL restringido/TLS/preflight validados; las otras cuatro APIs de dominio siguen pendientes. No hay funcionalidades administrativas, de citas, pacientes o pagos en el dashboard.
+
+- [Índice documental](docs/README.md).
+- [Información maestra LRPD](docs/LRPD/INFORMACION_MAESTRA_LRPD.md), conforme al PDF oficial de la raíz.
+- [Fases y alcance](docs/fases/ESTADO_FASES.md).
+- [Pruebas y evidencia](docs/evidencias/VALIDACIONES.md): 13/13 PostgreSQL; Fase 3.3 con 271 locales, 10 comprobaciones reales y 3 HTTP correctas.
+
+Configuración de aplicación: Supabase pública solo para Auth; `USERS_API_URL` es una variable exclusiva del servidor, localmente `http://127.0.0.1:4001`. Secretos PostgreSQL permanecen fuera del repositorio. `npm run dev` inicia web; Usuarios requiere activación local controlada con configuración privada y preflight, descrita en [activación](docs/base-de-datos/USERS_POSTGRES_ACTIVATION.md). No copiar credenciales de backend al frontend.
+
+README.md y AGENTS.md se conservan en la raíz. docs/ permanece ignorado por Git según la política original: el maestro se entrega localmente, sin commits ni push. Hay siete workspaces más el paquete raíz.
+
+---
+
+> Las notas que siguen se conservan como historial de preparación. Pueden describir limitaciones ya superadas; para el estado actual usar los enlaces anteriores. La migración de Usuarios ya aplicada no debe repetirse.
+
+
 Sistema Web para Mejorar el Control de Citas Psicológicas en el Centro Psicológico Particular Sentido de Vida – Ica, 2026.
 
 ## Estado
 
-Monorepositorio inicial: página estática y paquetes de servicio sin APIs, autenticación ni acceso a datos. La base de datos Supabase existente no se recrea ni modifica.
+Fase 2: portada estática y preparación de Supabase Auth con clientes separados de navegador y servidor. Sin pantallas de sesión, APIs de negocio ni acceso a tablas internas. La base de datos Supabase existente no se recrea ni modifica.
 
 ## Requisitos
 
@@ -30,7 +50,7 @@ tsconfig.base.json        Opciones TypeScript compartidas
 
 Cada servicio es un paquete independiente con su propio package.json y tsconfig.json. No dispone todavía de servidor ni comandos de ejecución. No se ha elegido un framework backend.
 
-Cada dominio será propietario lógico de sus datos. El frontend consumirá APIs backend, sin consultas directas a tablas internas de Supabase. PostgreSQL y Auth se integrarán en una etapa posterior.
+Cada dominio será propietario lógico de sus datos. El frontend consumirá APIs backend, sin consultas directas a tablas internas de Supabase. La preparación de Auth se describe en [SUPABASE_INTEGRATION.md](docs/arquitectura/SUPABASE_INTEGRATION.md); el acceso PostgreSQL queda pendiente de validar credenciales y permisos.
 
 ## Desarrollo local
 
@@ -59,10 +79,24 @@ La plantilla .env.example documenta las variables futuras. Cuando se implementen
 
 La configuración de shadcn/ui está en apps/web/components.json y la utilidad cn en src/lib/utils.ts. src/components/ui queda reservado para futuros componentes. No se agregan pantallas ni componentes de negocio.
 
-La migración no ejecuta npm install ni genera todavía package-lock.json. El comando npm ci requiere ese archivo. Se conservan las dependencias y sus rangos declarados; la primera instalación resolverá las versiones compatibles y creará el nuevo lockfile.
+El repositorio utiliza npm workspaces y package-lock.json. Los paquetes Supabase se fijan a versiones exactas.
 
-Para instalaciones reproducibles usar `npm ci`. Versionar package-lock.json junto con los manifiestos cuando se genere con la primera instalación aprobada.
+Para instalaciones reproducibles usar `npm ci`. Conservar package-lock.json junto con los manifiestos.
 
 ## Colaboración
 
 Consultar AGENTS.md. Conservar docs/ y su política de exclusión. No ejecutar commits, push, despliegues ni migraciones sin aprobación explícita.
+
+## Preparación de Supabase Auth
+
+Consultar [SUPABASE_INTEGRATION.md](docs/arquitectura/SUPABASE_INTEGRATION.md) para el alcance, las variables y la propuesta de aislamiento de los cinco esquemas internos. La portada compila sin credenciales. Para habilitar las utilidades Auth, configurar NEXT_PUBLIC_SUPABASE_URL y NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY en apps/web/.env.local. El proxy renueva sesiones cuando hay configuración; todavía no protege rutas.
+
+Comprobar la validación de variables sin red con `npm run test:auth-config --workspace=@sentido/web`. No hay conexión backend ni credenciales privilegiadas configuradas.
+
+## Módulo AUT
+
+Ya están disponibles /login y /dashboard protegido, con inicio y cierre de sesión mediante Supabase Auth. Consultar [AUT.md](docs/seguridad/AUT.md) para arquitectura, pruebas y límites pendientes. No hay registro público ni acceso a datos internos.
+
+## Usuarios — Fase 3.1
+
+El microservicio Usuarios incluye transporte HTTP y consulta del perfil propio preparada, con dependencias deshabilitadas y sin conexión a datos reales. Consultar [USERS_SERVICE.md](docs/servicios/USERS_SERVICE.md). No está conectado al dashboard.

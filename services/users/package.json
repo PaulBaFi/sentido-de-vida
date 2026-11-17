@@ -4,7 +4,21 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "node --watch src/main.ts",
+    "start": "node dist/main.js",
+    "test": "node --test tests/users.test.mjs tests/identity.test.mjs tests/postgres-plan.test.mjs tests/postgres.test.mjs tests/preflight.test.mjs tests/postgres-session.test.mjs tests/tls-preflight.test.mjs tests/pac-boundaries.test.mjs",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint src"
+    "lint": "eslint src tests scripts",
+    "build": "npm run typecheck && node scripts/build.mjs",
+    "test:postgres-integration": "node --test tests/postgres.integration.test.mjs"
+  },
+  "dependencies": {
+    "@sentido/contracts": "*",
+    "@supabase/supabase-js": "2.119.0",
+    "pg": "8.23.1"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "@types/pg": "8.23.1"
   }
 }

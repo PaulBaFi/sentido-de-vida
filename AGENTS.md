@@ -3,7 +3,7 @@
 - Proyecto académico Sentido de Vida, Ica, 2026. Documentación y comunicación en español.
 - Node.js 24, npm 11 y TypeScript estricto. Usar npm workspaces y conservar package-lock.json cuando se genere.
 - Mantener apps/, services/ y docs/. No borrar ni sobrescribir documentación existente.
-- docs/ permanece ignorado según la política original.
+- docs/ utiliza una lista cerrada en .gitignore: solo los 13 documentos tecnicos aprobados se versionan. Fuentes academicas DOCX/PDF/TXT y archivos privados permanecen locales; no ampliar la lista sin aprobacion. Conservar referencias como fuentes locales no publicadas, sin enlaces a archivos excluidos.
 - Web en apps/web: Next.js App Router, Tailwind CSS, shadcn/ui y Lucide.
 - Dominios independientes: users, catalog, appointments, payments, notifications.
 - Cada servicio es propietario lógico de sus datos. No consultar tablas de otros dominios.
